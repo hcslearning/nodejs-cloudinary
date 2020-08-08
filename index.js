@@ -1,7 +1,12 @@
-require('dotenv').config();
+function index(req, res) {
+    if( req.url !== '/' ) {
+        return true; // sigue con el sgte
+    }
+    
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    const page = `<a href='/upload'>Upload</a> | <a href='/transform'>Transform</a>`;
+    res.write( page );
+    return false;
+}
 
-const cloudinary = require('cloudinary').v2;
-
-cloudinary.uploader.upload("img/imagen.jpg", function(error, result){
-    console.log( result, error );
-});
+module.exports = index;
